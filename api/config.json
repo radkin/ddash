@@ -1,0 +1,25 @@
+{
+  "useDetailsPage": true,
+  "useRedis": false,
+  "yearVersions": [
+    ".1",
+    ".2",
+    ".3"
+  ],
+  "types": [
+    "deploy",
+    "review"
+  ],
+  "jobs": [
+    {
+      "name": "Larry Stooge",
+      "url": "http://larry-jenkins.com/jenkins/job/larry_${version}_stooge_${type}/",
+      "artifact": "larryStooge"
+    },
+    {
+      "name": "Moe Stooge",
+      "url": "http://moe-jenkins.com/jenkins/job/moe_${version}_${type}/",
+      "artifact": "moeStooge"
+    }
+  ]
+}

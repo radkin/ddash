@@ -1,0 +1,23 @@
+<link rel="stylesheet" type="text/css" href="app/landing/landingStyles.css">
+<div ng-controller="landingController as landing">
+  <div class="container-fluid lbody">
+    <div class="llist">
+      <div ng-repeat="category in landing.categories" class="panel litem" ng-class="category.color ? 'panel-' + category.color : 'panel-white'">
+        <div class="panel-heading">{{category.heading}}<span ng-if="category.icon" class="pull-right fa fa-{{category.icon}}"></span></div>
+        <div class="list-group">
+          <div ng-repeat="link in category.links" class="text-center list-group-item">
+            <a ng-href="{{link.url}}">{{link.name}}</a>
+            <map ng-if="link.zabName">
+              <img class="statusimage animate-show"
+                ng-src="assets/{{link.icon}}_small.gif"
+                style="display:inline; float:right"
+                tooltip="{{link.subject}}"
+                tooltip-speed="slow"
+                tooltip-placement="left"
+                tooltip-trigger="mouseenter">
+            </map>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

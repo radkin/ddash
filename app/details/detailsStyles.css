@@ -1,0 +1,75 @@
+
+
+.panel > span {
+  cursor: pointer;
+}
+
+.panel-default .panel-heading {
+  color: #333;
+  background-color: #f5f5f5;
+  border-color: #ddd;
+}
+
+.panel-success .panel-heading {
+  color: #3c763d;
+  background-color: #dff0d8;
+  border-color: #d6e9c6;
+}
+
+.panel-danger .panel-heading {
+  color: #a94442;
+  background-color: #f2dede;
+  border-color: #ebccd1;
+}
+
+.panel-info .panel-heading {
+  color: #31708f;
+  background-color: #d9edf7;
+  border-color: #bce8f1;
+}
+
+.panel-primary .panel-heading {
+  color: #fff;
+  background-color: #337ab7;
+  border-color: #337ab7;
+}
+.panel-warning .panel-heading {
+  color: #8a6d3b;
+  background-color: #fcf8e3;
+  border-color: #faebcc;
+}
+
+span .panel-heading {
+  padding: 10px 15px;
+  display: flex;
+}
+
+span .panel-heading>* {
+  flex: 1;
+}
+
+span .panel-heading .artifact {
+  text-align: center;
+}
+
+span .panel-heading .result {
+  text-align: right;
+}
+
+.panel-collapse {
+  overflow: auto;
+}
+
+span > .panel-body {
+  padding-bottom: 0;
+}
+
+.panel-body {
+  color: #777;
+}
+
+.panel-body > h4 {
+  margin: 0;
+  margin-bottom: 15px;
+  color: #000;
+}

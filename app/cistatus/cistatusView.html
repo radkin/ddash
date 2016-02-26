@@ -1,0 +1,151 @@
+<link rel="stylesheet" type="text/css" href="app/cistatus/cistatusStyles.css">
+<div ng-controller="cistatusController as cistatus" ng-init="checkModel.left = !checkModel.left; checkModelLayer.left = !checkModelLayer.left; checkModelLayer.middle = !checkModelLayer.middle; checkModelLayer.right = !checkModelLayer.right">
+  <div class="container-fluid">
+    <h1>CI Status <span ng-if="cistatus.loading" class="fa fa-spinner fa-pulse"></span><small ng-if="cistatus.yearVersions.length">Updated {{cistatus.timestamp | fromNow}} ago...</small></h1>
+  </div>
+  <div ng-mouseenter="show = true" ng-mouseleave="show = false" class="dbarsbackground">
+    <a class="fa fa-bars {{main.showSidebar ? '' : 'drotate'}}"></a>
+    <div ng-show="show" class="btn-group animate-show">
+    <th>
+      <label class="btn btn-success" ng-model="checkModelLayer.left" btn-checkbox>Web Applications</label>
+      <label class="btn btn-success" ng-model="checkModelLayer.middle" btn-checkbox>Services</label>
+      <label class="btn btn-success" ng-model="checkModelLayer.right" btn-checkbox>DB</label>
+    </th>
+  </div>
+</div>
+        <div class="btn-group btn-group-justified" role="group">
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" ng-model="checkModel.left" btn-checkbox>{{cistatus.yearVersions[0]}}</button>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" ng-model="checkModel.middle" btn-checkbox>{{cistatus.yearVersions[1]}}</button>
+          </div>
+          <div class="btn-group" role="group">
+            <button type="button" class="btn btn-default" ng-model="checkModel.right" btn-checkbox>{{cistatus.yearVersions[2]}}</button>
+          </div>
+        </div>
+    <table class="table table-bordered ctable">
+    <thead>
+      <tr>
+      <th>
+      Application
+      </th>
+        <th collapse="!checkModel.left" class="y">Review Status</th>
+        <th collapse="!checkModel.left" class="y">Last Review Success</th>
+        <th collapse="!checkModel.left" class="y">Deploy Status</th>
+        <th collapse="!checkModel.left" class="y">Last Deploy Success</th>
+        <th collapse="!checkModel.left" class="y">Artifact or Build #</th>
+        <th collapse="!checkModel.middle" class="b">Review Status</th>
+        <th collapse="!checkModel.middle" class="b">Last Review Success</th>
+        <th collapse="!checkModel.middle" class="b">Deploy Status</th>
+        <th collapse="!checkModel.middle" class="b">Last Deploy Success</th>
+        <th collapse="!checkModel.middle" class="b">Artifact or Build #</th>
+        <th collapse="!checkModel.right" class="g">Review Status</th>
+        <th collapse="!checkModel.right" class="g">Last Review Success</th>
+        <th collapse="!checkModel.right" class="g">Deploy Status</th>
+        <th collapse="!checkModel.right" class="g">Last Deploy Success</th>
+        <th collapse="!checkModel.right" class="g">Artifact or Build #</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="job in cistatus.jobs" ng-show="cistatus.webapps.indexOf(job.name) != -1 && checkModelLayer.left || cistatus.service.indexOf(job.name) != -1 && checkModelLayer.middle || cistatus.db.indexOf(job.name) != -1 && checkModelLayer.right" >
+        <th>
+          {{job.name}}
+        </th>
+        <td collapse="!checkModel.left" class="y">
+          <a href="{{job[cistatus.yearVersions[0]].reviewUrl}}">
+            <img class="statusimage" ng-src="assets/{{job[cistatus.yearVersions[0]].reviewStatus}}.gif"
+              tooltip="{{job[cistatus.yearVersions[0]].reviewStatus | reWord}}"
+              tooltip-placement="top"
+              tooltip-trigger="mouseenter">
+          </a>
+        </td>
+        <td collapse="!checkModel.left" class="y">
+          <a href="{{job[cistatus.yearVersions[0]].reviewLastUrl}}">
+            {{job[cistatus.yearVersions[0]].reviewLast | fromNow}}
+          </a>
+        </td>
+        <td collapse="!checkModel.left" class="y">
+          <a href="{{job[cistatus.yearVersions[0]].deployUrl}}">
+            <img class="statusimage" ng-src="assets/{{job[cistatus.yearVersions[0]].deployStatus}}.gif"
+              tooltip="{{job[cistatus.yearVersions[0]].deployStatus | reWord}}"
+              tooltip-placement="top"
+              tooltip-trigger="mouseenter">
+          </a>
+        </td>
+        <td collapse="!checkModel.left" class="y">
+          <a href="{{job[cistatus.yearVersions[0]].deployLastUrl}}">
+            {{job[cistatus.yearVersions[0]].deployLast | fromNow}}
+          </a>
+        </td>
+        <td collapse="!checkModel.left" class="y">
+          <a href="{{cistatus.useDetailsPage ? '#/cistatus/' + job.name + '/' + cistatus.yearVersions[0] : job[cistatus.yearVersions[0]].deployLastUrl + '/changes'}}">
+            {{job[cistatus.yearVersions[0]].artifact || job[cistatus.yearVersions[0]].trigger}}
+          </a>
+        </td>
+        <td collapse="!checkModel.middle" class="b">
+          <a href="{{job[cistatus.yearVersions[1]].reviewUrl}}">
+            <img class="statusimage" ng-src="assets/{{job[cistatus.yearVersions[1]].reviewStatus}}.gif"
+              tooltip="{{job[cistatus.yearVersions[1]].reviewStatus | reWord}}"
+              tooltip-placement="top"
+              tooltip-trigger="mouseenter">
+          </a>
+        </td>
+        <td collapse="!checkModel.middle" class="b">
+          <a href="{{job[cistatus.yearVersions[1]].reviewLastUrl}}">
+            {{job[cistatus.yearVersions[1]].reviewLast | fromNow}}
+          </a>
+        </td>
+        <td collapse="!checkModel.middle" class="b">
+          <a href="{{job[cistatus.yearVersions[1]].deployUrl}}">
+            <img class="statusimage" ng-src="assets/{{job[cistatus.yearVersions[1]].deployStatus}}.gif"
+              tooltip="{{job[cistatus.yearVersions[1]].deployStatus | reWord}}"
+              tooltip-placement="top"
+              tooltip-trigger="mouseenter">
+          </a>
+        </td>
+        <td collapse="!checkModel.middle" class="b">
+          <a href="{{job[cistatus.yearVersions[1]].deployLastUrl}}">
+            {{job[cistatus.yearVersions[1]].deployLast | fromNow}}
+          </a>
+        </td>
+        <td collapse="!checkModel.middle" class="b">
+          <a href="{{cistatus.useDetailsPage ? '#/cistatus/' + job.name + '/' + cistatus.yearVersions[1] : job[cistatus.yearVersions[1]].deployLastUrl + '/changes'}}">
+            {{job[cistatus.yearVersions[1]].artifact || job[cistatus.yearVersions[0]].trigger}}
+          </a>
+        </td>
+        <td collapse="!checkModel.right" class="g">
+          <a href="{{job[cistatus.yearVersions[2]].reviewUrl}}">
+            <img class="statusimage" ng-src="assets/{{job[cistatus.yearVersions[2]].reviewStatus}}.gif"
+              tooltip="{{job[cistatus.yearVersions[2]].reviewStatus | reWord}}"
+              tooltip-placement="top"
+              tooltip-trigger="mouseenter">
+          </a>
+        </td>
+        <td collapse="!checkModel.right" class="g">
+          <a href="{{job[cistatus.yearVersions[2]].reviewLastUrl}}">
+            {{job[cistatus.yearVersions[2]].reviewLast | fromNow}}
+          </a>
+        </td>
+        <td collapse="!checkModel.right" class="g">
+          <a href="{{job[cistatus.yearVersions[2]].deployUrl}}">
+            <img class="statusimage" ng-src="assets/{{job[cistatus.yearVersions[2]].deployStatus}}.gif"
+              tooltip="{{job[cistatus.yearVersions[2]].deployStatus | reWord}}"
+              tooltip-placement="top"
+              tooltip-trigger="mouseenter">
+          </a>
+        </td>
+        <td collapse="!checkModel.right" class="g">
+          <a href="{{job[cistatus.yearVersions[2]].deployLastUrl}}">
+            {{job[cistatus.yearVersions[2]].deployLast | fromNow}}
+          </a>
+        </td>
+        <td collapse="!checkModel.right" class="g">
+          <a href="{{cistatus.useDetailsPage ? '#/cistatus/' + job.name + '/' + cistatus.yearVersions[2] : job[cistatus.yearVersions[2]].deployLastUrl + '/changes'}}">
+            {{job[cistatus.yearVersions[2]].artifact || job[cistatus.yearVersions[0]].trigger}}
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

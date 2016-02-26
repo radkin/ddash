@@ -1,0 +1,39 @@
+<link rel="stylesheet" type="text/css" href="app/details/detailsStyles.css">
+<div ng-controller="detailsController as details">
+  <div class="container-fluid">
+    <h1>{{details.title}} <span ng-if="details.loading" class="fa fa-spinner fa-pulse"></span><small ng-if="details.builds.length">Updated {{details.timestamp | fromNow}} ago...</small></h1>
+    <h1 ng-if="!details.loading && !details.builds.length">No data found :[</h1>
+    <accordion close-others="false">
+      <accordion-group template-url="group-template.html" ng-repeat="build in details.builds" class="panel-{{build.result | panelFilter}}" is-open="build.closed">
+        <accordion-heading>
+          <div class="panel-heading">
+            <span class="build">{{"Build #" + build.number}}</span>
+            <span class="artifact">{{build.version || ''}}</span>
+            <span class="result">{{build.building ? 'IN PROGRESS' : build.result}}</span>
+          </div>
+          <div class="panel-body">
+            <h4>{{build.changes[0].msg || 'No changes to display'}}<small ng-if="build.changes.length > 1"> ({{build.changes.length - 1}} More)</small></h4>
+          </div>
+        </accordion-heading>
+        <div ng-repeat="change in build.changes">
+          <div class="panel-body" style="padding-top: 0;">
+            <h4 ng-if="$index !== 0">{{change.msg}}</h4>
+            <p><strong>Timestamp: </strong>{{change.timestamp | timestamp}} ({{change.timestamp | fromNow}} ago)</p>
+            <p><strong>Author: </strong>{{change.author.fullName || change.author.id}} <a ng-if="change.author.property[5]" href="mailto:{{change.author.property[5].address}}">({{change.author.property[5].address}})</a></p>
+            <p><strong>Commit ID: </strong><a href="http://larry-gerrit:8080/#/c/{{change.gerrit}}">{{change.commitId}}</a></p>
+            <strong>Affected Files:</strong>
+            <br>
+            <a ng-repeat="path in change.affectedPaths" href="http://larry-gerrit:8080/#/c/{{change.gerrit}}/1/{{path}}">{{path}}<br></a>
+          </div>
+        </div>
+      </accordion-group>
+    </accordion>
+  </div>
+</div>
+
+<script type="text/ng-template" id="group-template.html">
+  <div class="panel {{panelClass || 'panel-default'}}" accordion-transclude="heading">
+    <span ng-click="toggleOpen()"></span>
+    <div class="panel-collapse collapse" collapse="!isOpen" ng-transclude> </div>
+  </div>
+</script>

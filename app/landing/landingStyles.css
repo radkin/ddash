@@ -1,0 +1,26 @@
+
+.lbody {
+  padding-top: 15px;
+  -webkit-backface-visibility: hidden;
+}
+
+.llist {
+  -webkit-backface-visibility: hidden;
+  -webkit-column-count: 3;
+  -webkit-column-gap: 1.5em;
+  -webkit-column-fill: auto;
+  -moz-column-count: 3;
+  -moz-column-gap: 1.5em;
+  -moz-column-fill: auto;
+  column-count: 3;
+  column-gap: 1.5em;
+  column-fill: auto;
+  overflow: hidden;
+}
+
+.panel {
+  -webkit-backface-visibility: hidden;
+  -webkit-column-break-inside: avoid;
+  -moz-column-break-inside: avoid;
+  column-break-inside: avoid;
+}

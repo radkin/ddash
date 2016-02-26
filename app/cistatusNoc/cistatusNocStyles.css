@@ -1,0 +1,36 @@
+
+.ctable {
+  font-size: 12px;
+  margin-bottom: 0;
+  text-align: center;
+}
+
+.ctable .statusimage {
+  max-width: 30px;
+}
+
+.ctable th {
+  text-align: center;
+  vertical-align: middle !important;
+}
+
+.ctable tr {
+  height: 41px;
+}
+
+.ctable td {
+  vertical-align: middle !important;
+  padding: 4px !important;
+}
+
+.ctable .y {
+  background-color: #fcf8e3;
+}
+
+.ctable .b {
+  background-color: #d9edf7;
+}
+
+.ctable .g {
+  background-color: #dff0d8;
+}

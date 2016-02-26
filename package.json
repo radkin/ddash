@@ -1,0 +1,31 @@
+{
+  "name": "DevOps_Dashboard",
+  "version": "0.2.0",
+  "main": "server.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/radkin/DevOps_Dashboard.git"
+  },
+  "authors": "Garrett Cox & Noel Miller",
+  "license": "GNU",
+  "dependencies": {
+    "angular": "^1.4.2",
+    "angular-animate": "^1.4.4",
+    "angular-route": "^1.4.2",
+    "angular-ui-bootstrap": "^0.13.1",
+    "bluebird": "^2.9.32",
+    "bootstrap": "^3.3.5",
+    "colorslite": "0.0.2",
+    "cors": "^2.7.1",
+    "express": "^4.13.1",
+    "font-awesome": "^4.3.0",
+    "fs-utils": "^0.6.0",
+    "lodash": "^3.10.0",
+    "moment": "^2.10.3",
+    "request": "^2.58.0",
+    "then-redis": "^1.3.0",
+    "zabbix-node": "^0.2.0",
+    "angular-resource": "^1.4.7",
+    "nightwatch": "0.8.6"
+  }
+}
