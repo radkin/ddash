@@ -45,16 +45,16 @@ To set up a cronjob to constantly update the data follow these steps:
 
 Production / Development
 ```
-*/3 * * * * /usr/bin/node /home/dduser/DevOps_Dashboard/api/cistatus/worker.js > /home/dduser/cistatus.log 2>&1
-*/2 * * * * export ZABBIX_USER="secret_user"; export ZABBIX_PASS="secret_pass"; /usr/bin/node /home/dduser/DevOps_Dashboard/api/landing/worker.js > /home/dduser/landing.log 2>&1
-0 * * * * /usr/bin/node /home/dduser/DevOps_Dashboard/api/details/worker.js > /home/dduser/details.log 2>&1
+*/3 * * * * /usr/bin/node /home/dduser/ddash/api/cistatus/worker.js > /home/dduser/cistatus.log 2>&1
+*/2 * * * * export ZABBIX_USER="secret_user"; export ZABBIX_PASS="secret_pass"; /usr/bin/node /home/dduser/ddash/api/landing/worker.js > /home/dduser/landing.log 2>&1
+0 * * * * /usr/bin/node /home/dduser/ddash/api/details/worker.js > /home/dduser/details.log 2>&1
 ```
 
 Development Only
 ```
 # update to master every 5 minutes and restart the server daily
-*/5 * * * * cd DevOps_Dashboard; git reset --hard; git pull --rebase > /home/dduser/git_update.log 2>&1
-0 17 * * * cd DevOps_Dashboard; pm2 stop server; pm2 start server > /home/dduser/server_restart.log 2>&1
+*/5 * * * * cd ddash; git reset --hard; git pull --rebase > /home/dduser/git_update.log 2>&1
+0 17 * * * cd ddash; pm2 stop server; pm2 start server > /home/dduser/server_restart.log 2>&1
 ```
 
 1.	Confirm you have added the cron task by running `crontab -l`
@@ -123,7 +123,9 @@ Development Lifecycle including Release Process
 
 	-	coding changes reviewed and ready for commit
 
-			cd nightwatch-tests; nightwatch --test tests/basic_func.js
+		```
+		cd nightwatch-tests; nightwatch --test tests/basic_func.js
+		```
 
 	-	Review results and confirm functionality
 
@@ -133,13 +135,13 @@ Development Lifecycle including Release Process
 
 	-	Open a merge request, review the changes and diff, assign, comment, etc.
 
-		http://larry.com/DevOps_Dashboard
+		http://larry.com/ddash
 
 *	**release to development**
 
 		ssh larry-dev.com
 		sudo su - dduser
-		cd DevOps_Dashboard
+		cd ddash
 		git pull --rebase
 		git checkout <your branch>
 		pm2 stop server
@@ -195,7 +197,7 @@ Development Lifecycle including Release Process
 			ssh moe.com
 			sudo su - dduser
 			tmux a -t ddash1 (not required, but useful)
-			cd DevOps_Dashboard
+			cd ddash
 			git pull --rebase
 			
 			** if API change, run the worker.js scripts now**

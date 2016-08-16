@@ -35,8 +35,18 @@ module.exports = function() {
           console.log('Zabbix API version is: ' + body.result);
         });
 
-        zabbix.call('alert.get', {
+        zabbix.call('trigger.get', {
+            priority: [1, 2, 3, 4, 5],
+            value: 1,
             output: 'extend',
+            only_true: true,
+            monitored: 1,
+            withLastEventUnacknowledged: 1,
+            skipDependent: 1,
+            expandData: 'host',
+            expandDescription: 1,
+            sortfield: 'lastchange',
+            sortorder: 'DESC'
           },
           function(err, resp, body) {
             if (err) {

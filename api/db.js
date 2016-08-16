@@ -2,7 +2,7 @@
 var redis = require('then-redis');
 
 var db = redis.createClient({
-  host: 'moe.com',
+  host: 'localhost',
   port: 6379,
 });
 

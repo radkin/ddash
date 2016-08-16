@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <h2>Login</h2>
+    </head>
+    <body ng-app="devops">
+        <div class="col-md-6 col-md-offset-3">
+            <form name="userForm" ng-submit="submit()" ng-controller="loginController">
+                <label for="username">Username</label>
+                <input type="username" ng-model="username" class="form-control" name="username" required/>
+                <span ng-show="userForm.username.$dirty && userForm.username.$error.required" class="help-block">Username is required</span>
+                <label for="password">Password</label>
+                <input type="password" ng-model="password" class="form-control" name="password" required/>
+                <span ng-show="userForm.password.$dirty && userForm.password.$error.required" class="help-block">Password is required</span>
+                <input type="submit" id="submit" value="Submit"/>
+            </form>
+        </div>
+    </body>
+</html>
