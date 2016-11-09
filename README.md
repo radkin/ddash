@@ -1,4 +1,7 @@
 ddash
+
+Next Generation [branch_cut_status](https://github.com/radkin/branch_cut_status) using the ExpressJS framework, NodeJS, AngularJS and Redis.
+
 ================
 
 Running The App
