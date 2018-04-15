@@ -1,37 +1,30 @@
 angular.module('devops');
 
 categories = [{
-  heading: 'Jenkins',
-  width: 4,
-  icon: 'file-text',
-  color: 'yellow',
-  links: [{
-    name: 'larrydev',
-    zabName: 'larry-dev',
-    url: 'http://larry-dev:8080/jenkins/',
+    heading: 'Jenkins',
+    width: 4,
+    icon: 'file-text',
+    color: 'yellow',
+    links: [{
+        name: 'larry',
+        zabName: 'larry-alias',
+        url: 'https://jenkins.domain.com/jenkins/',
+      }, {
+        name: 'moe',
+        zabName: 'moei-alias',
+        url: 'http://moe-jenkins.domain.com:8080/jenkins/',
+      }, ],
   }, {
-    name: 'moe',
-    zabName: 'moe.com',
-    url: 'http://moe.com:8080/jenkins/',
-  }, {
-    name: 'Curly Server',
-    zabName: 'Curly Jenkins',
-    url: 'http://curly.com:8080/jenkins/',
-  }]
-}, {
-  heading: 'gerrit servers',
-  width: 4,
-  icon: 'signal',
-  color: 'green',
-  links: [{
-    name: 'curly gerrit 1',
-    zabName: 'cg1',
-    url: 'http://curl-gerrit.com/accounts/login/',
-  }, {
-    name: 'larry gerrit 2',
-    url: 'http://larry-gerrit.com/accounts/login/',
-  }, {
-    name: 'moe gerrit 1',
-    url: 'https://moe-gerrit.com/accounts/login/',
-  }]
-}];
+    heading: 'some other kind of server',
+    width: 4,
+    icon: 'rocket',
+    color: 'red',
+    links: [{
+        name: 'other kind1',
+        url: 'https://other.domain.com/Page/Home',
+      }, {
+        name: 'another kind',
+        url: 'https://console.developers.google.com/project/our-google-cloud-account/compute/instances?graph=GCE_CPU',
+      }, ],
+  }, ],
+}, ];

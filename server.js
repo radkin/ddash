@@ -1,4 +1,3 @@
-
 // Hosts the API and serves up the client using Express
 var port = process.env.PORT || 9000;
 var express = require( 'express' );
@@ -11,11 +10,9 @@ const session = require( 'express-session' );
 var RedisStore = require('connect-redis')(session);
 var ActiveDirectory = require( 'activedirectory' );
 var LocalStrategy = require( 'passport-local' );
-// set your admin group here
-var groupName = 'admins';
+var groupName = 'devops';
 var ad = {};
 
-// set env vars for your LDAP/AD
 var userSearch = process.env.LDAP_USER_SEARCH;
 var managerPasswordSecret = process.env.LDAP_MANAGER_PASSWORD_SECRET;
 var managerDN = process.env.LDAP_MANAGER_DN;
@@ -24,6 +21,7 @@ var server = process.env.LDAP_SERVER;
 
 // Setting up API routes
 var cistatusRouter = express.Router();
+var buildfinderRouter = express.Router();
 var detailsRouter = express.Router();
 var landingRouter = express.Router();
 
@@ -71,7 +69,7 @@ var app = express();
 app.use( cookieParser() );
 app.use( session( {
     store: new RedisStore(options),
-    secret: 'DevOps_Dashboard',
+    secret: 'ddash',
     resave: true,
     saveUninitialized: true,
     cookie: {
@@ -89,6 +87,7 @@ app.use( express.static( __dirname ) );
 
 // router apps
 app.use( '/api/cistatus', cistatusRouter );
+app.use( '/api/buildfinder', buildfinderRouter );
 app.use( '/api/details', detailsRouter );
 app.use( '/api/landing', landingRouter );
 
@@ -96,9 +95,9 @@ app.use( '/api/landing', landingRouter );
 require( './api/router' )
     .cistatus( cistatusRouter );
 require( './api/router' )
-    .details( detailsRouter );
+    .buildfinder( buildfinderRouter );
 require( './api/router' )
-    .landing( landingRouter );
+    .details( detailsRouter );
 
 app.use( bodyParser.json() );
 app.use( bodyParser.urlencoded( {

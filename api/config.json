@@ -1,10 +1,11 @@
 {
   "useDetailsPage": true,
-  "useRedis": false,
+  "useRedis": true,
   "yearVersions": [
-    ".1",
-    ".2",
-    ".3"
+    "susan2018",
+    "harry2018",
+    "frank2017",
+    "marcie2018"
   ],
   "types": [
     "deploy",
@@ -12,14 +13,19 @@
   ],
   "jobs": [
     {
-      "name": "Larry Stooge",
-      "url": "http://larry-jenkins.com/jenkins/job/larry_${version}_stooge_${type}/",
-      "artifact": "larryStooge"
+      "name": "ourFirstApp",
+      "url": "https://firstapp-server.domain.com/jenkins/job/${type}_first-appi_${version}_Trigger/",
+      "artifact": "ourFirstAppArtifact"
     },
     {
-      "name": "Moe Stooge",
-      "url": "http://moe-jenkins.com/jenkins/job/moe_${version}_${type}/",
-      "artifact": "moeStooge"
+      "name": "ourSecondApp",
+      "url": "https://secondapp-server.domain.com/jenkins/job/${type}_second-app_${version}_Trigger/",
+      "artifact": "ourSecondAppArtifact"
+    },
+    {
+      "name": "ourThirdApp",
+      "url": "http://thirdapp-server.domain.com/jenkins/job/third-appG_${version}_${type}/",
+      "artifact": "thirdAppArtifact"
     }
   ]
 }

@@ -20,10 +20,10 @@
             <h4 ng-if="$index !== 0">{{change.msg}}</h4>
             <p><strong>Timestamp: </strong>{{change.timestamp | timestamp}} ({{change.timestamp | fromNow}} ago)</p>
             <p><strong>Author: </strong>{{change.author.fullName || change.author.id}} <a ng-if="change.author.property[5]" href="mailto:{{change.author.property[5].address}}">({{change.author.property[5].address}})</a></p>
-            <p><strong>Commit ID: </strong><a href="http://larry-gerrit:8080/#/c/{{change.gerrit}}">{{change.commitId}}</a></p>
+            <p><strong>Commit ID: </strong><a href="http://wdsgerrit:8080/#/c/{{change.gerrit}}">{{change.commitId}}</a></p>
             <strong>Affected Files:</strong>
             <br>
-            <a ng-repeat="path in change.affectedPaths" href="http://larry-gerrit:8080/#/c/{{change.gerrit}}/1/{{path}}">{{path}}<br></a>
+            <a ng-repeat="path in change.affectedPaths" href="http://wdsgerrit:8080/#/c/{{change.gerrit}}/1/{{path}}">{{path}}<br></a>
           </div>
         </div>
       </accordion-group>
