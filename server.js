@@ -69,7 +69,7 @@ var app = express();
 app.use( cookieParser() );
 app.use( session( {
     store: new RedisStore(options),
-    secret: 'DevOps_Dashboard',
+    secret: 'ddash',
     resave: true,
     saveUninitialized: true,
     cookie: {

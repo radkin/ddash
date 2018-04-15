@@ -1,4 +1,4 @@
-DevOps Dashboard
+ddash
 ================
 
 Running The App
@@ -46,16 +46,16 @@ To set up a cronjob to constantly update the data follow these steps:
 Production / Development
 
 ```
-*/3 * * * * /usr/bin/node /home/dduser/DevOps_Dashboard/api/cistatus/worker.js > /home/dduser/cistatus.log 2>&1
-0 * * * * /usr/bin/node /home/dduser/DevOps_Dashboard/api/notifyEmail/worker.js > /home/dduser/notifyemail.log 2>&1
+*/3 * * * * /usr/bin/node /home/dduser/ddash/api/cistatus/worker.js > /home/dduser/cistatus.log 2>&1
+0 * * * * /usr/bin/node /home/dduser/ddash/api/notifyEmail/worker.js > /home/dduser/notifyemail.log 2>&1
 ```
 
 Development Only
 
 ```
 # update to master every 5 minutes and restart the server daily
-*/5 * * * * cd DevOps_Dashboard; git reset --hard; git pull --rebase > /home/dduser/git_update.log 2>&1
-0 17 * * * cd DevOps_Dashboard; pm2 stop server; pm2 start server > /home/dduser/server_restart.log 2>&1
+*/5 * * * * cd ddash; git reset --hard; git pull --rebase > /home/dduser/git_update.log 2>&1
+0 17 * * * cd ddash; pm2 stop server; pm2 start server > /home/dduser/server_restart.log 2>&1
 ```
 
 1.	Confirm you have added the cron task by running `crontab -l`
