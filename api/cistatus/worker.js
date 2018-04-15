@@ -26,7 +26,7 @@ module.exports = function() {
       if (job.artifact) {
 
         promiseArray.push(
-          get('http://adb.devops.fds.com/artifacts/search?name=' +
+          get('http://yourartifactsrepo.domain.com/artifacts/search?name=' +
             escape(job.artifact) + '&release=' + ver)
           .spread(function(res, body) {
 
@@ -110,15 +110,15 @@ module.exports = function() {
 };
 
 function template(url, ver, type, name) {
-  if (name === 'PROS' && type === 'deploy') {
+  if (name === 'larry' && type === 'deploy') {
     return _template(url)({
       version: ver,
       type: type + '_TRIGGER'
     });
-  } else if (name === 'SDP') {
+  } else if (name === 'moe') {
     if (type === 'deploy') {
       return _template(url)({
-        version: ver + '_NEXUS-RELEASE-UPLOAD/',
+        version: ver + '_your_id_trigger_here/',
         type: type
       });
     } else {
