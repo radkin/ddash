@@ -34,6 +34,10 @@
 .ctable .g {
   background-color: #dff0d8;
 }
+.ctable .h {
+  background-color: #E0FFFF;
+}
+
 .animate-show {
   line-height: 20px;
   opacity: 1;
@@ -50,4 +54,17 @@
   line-height: 0;
   opacity: 0;
   padding: 0 10px;
+}
+
+.blankrow {
+    margin-bottom: 15px;
+    padding: 10px;
+    color: #0A416B;
+    clear:both;
+}
+.left, .center, .right{
+    float:left;
+    width:32%;
+    padding:5px;
+
 }

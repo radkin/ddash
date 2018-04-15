@@ -7,15 +7,6 @@
         <div class="list-group">
           <div ng-repeat="link in category.links" class="text-center list-group-item">
             <a ng-href="{{link.url}}">{{link.name}}</a>
-            <map ng-if="link.zabName">
-              <img class="statusimage animate-show"
-                ng-src="assets/{{link.icon}}_small.gif"
-                style="display:inline; float:right"
-                tooltip="{{link.description}}"
-                tooltip-speed="slow"
-                tooltip-placement="left"
-                tooltip-trigger="mouseenter">
-            </map>
           </div>
         </div>
       </div>

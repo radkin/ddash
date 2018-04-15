@@ -1,6 +1,6 @@
 var config = require('../config');
 var Promise = require('bluebird');
-var _template = require('lodash/string/template');
+var _template = require('lodash/template');
 var get = Promise.promisify(require('request'));
 require('colorslite');
 
@@ -24,7 +24,7 @@ module.exports = function() {
   var left = {};
 
   config.jobs.forEach(function(job) {
-    if (job.name === 'larry' || job.name === 'moe' || job.name === 'curly') {
+    if (job.name === 'BCOM Legacy' || job.name === 'MCOM Legacy' || job.name === 'MidTier') {
       console.log('---- skipping ' + job.name + ' because it puts too much of a strain on our servers ----');
     } else {
 
@@ -70,7 +70,7 @@ module.exports = function() {
               if (build.changeSet) {
                 newBuild.changes = build.changeSet.items;
                 newBuild.changes.forEach(function(change) {
-                  changePromiseArray.push(get('http://moe-gerrit:8080/changes/?q=' + change.commitId)
+                  changePromiseArray.push(get('http://wdsgerrit:8080/changes/?q=' + change.commitId)
                     .spread(function(res, body) {
                       var parsed = JSON.parse(body.substring(4, body.length));
                       if (parsed[0] && parsed[0]._number) change.gerrit = parsed[0]._number;
@@ -115,12 +115,12 @@ module.exports = function() {
 };
 
 function template(url, ver, type, name) {
-  if (name === 'curlStooge' && type === 'deploy') {
-    return _template(url)({ version: ver, type: type + '_stooge' });
-  } else if (name === 'moe') {
+  if (name === 'PROS' && type === 'deploy') {
+    return _template(url)({ version: ver, type: type + '_TRIGGER' });
+  } else if (name === 'SDP') {
     return _template(url)({version: ver + '_BUILD/', type: type });
-  } else if (name === 'curly') {
-    return _template(url)({ version: '', type: '' + 'Upload-curly-Artifact/' });
+  } else if (name === 'EDD') {
+    return _template(url)({ version: '', type: '' + 'Upload-Trunk-Artifact/' });
   } else {
     return _template(url)({ version: ver, type: type });
   }

@@ -1,0 +1,11 @@
+<link rel="stylesheet" type="text/css" href="app/buildfinder/buildfinderStyles.css">
+<div ng-controller="buildfinderController as results" >
+  <!-- {{results.buildObjects}} -->
+  <div class="container-fluid">
+    <div ng-repeat="result in results.buildObjects">
+        <br>
+          <b>release</b>:{{result.release}}      <b>build time</b>:{{result.build_duration}} seconds     <b>job name</b>:{{result.JOB_NAME}}
+        </br>
+    </div>
+  </div>
+</div>

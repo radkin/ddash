@@ -1,0 +1,116 @@
+<link rel="stylesheet" type="text/css" href="app/cistatus/cistatusStyles.css">
+<div ng-controller="cistatusController as cistatus">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">CI Status <span ng-if="cistatus.loading" class="fa fa-spinner fa-pulse"></span><small ng-if="cistatus.yearVersions.length">Updated {{cistatus.timestamp | fromNow}} ago...</small></a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="nav nav-pills">
+          <li class="nav-item">
+            <a class="nav-link" href="#!/cistatus1Success">Success <span class="badge badge-success">{{cistatus.jobStatus.blue[cistatus.yearVersions[1]]}}</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link active" href="#!/cistatus1Failed">Failed
+              <span class="badge badge-light">
+                {{cistatus.jobStatus.redReview[cistatus.yearVersions[1]]}}R
+                /{{cistatus.jobStatus.redDeploy[cistatus.yearVersions[1]]}}D
+              </span></a>
+          </li>
+          <!--
+          <li class="nav-item">
+            <a class="nav-link" href="#!/cistatus1Failed">overTwoDays<span class="badge badge-dark">{{cistatus.jobStatus.failed1Day[cistatus.yearVersions[1]]}}</span></a>
+          </li>
+        -->
+          <li class="nav-item">
+            <a class="nav-link" href="#!/cistatus1Failed">oneDay<span class="badge badge-danger">{{cistatus.jobStatus.failed1DayLessThan2[cistatus.yearVersions[1]]}}</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#!/cistatus1NotBuilt">Not Built<span class="badge badge-secondary">{{cistatus.jobStatus.notbuilt[cistatus.yearVersions[1]]}}</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#!/cistatus1Unstable">Unstable<span class="badge badge-warning">{{cistatus.jobStatus.unstable[cistatus.yearVersions[1]]}}</span></a>
+          </li>
+        </ul>
+        <ul class="col-xs-2">
+          <input type="text"
+            class="form-control"
+            placeholder="Search for application"
+            ng-model="selectedEnvironment"
+            typeahead="environment as environment.name for environment in cistatus.environments | filter:$viewValue | limitTo:15"
+            typeahead-template-url="templates/cistatus-tpl.html">
+          </input>
+        </ul>
+      </div>
+    </nav>
+
+  <div>
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link" href="#!/cistatus">{{cistatus.yearVersions[0]}}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link active" href="#!/cistatus1">{{cistatus.yearVersions[1]}}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#!/cistatus2">{{cistatus.yearVersions[2]}}</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#!/cistatus3">{{cistatus.yearVersions[3]}}</a>
+      </li>
+    </ul>
+  </div>
+
+    <table class="table table-bordered ctable">
+    <thead>
+      <tr>
+      <th>Application</th>
+        <th class="b">Review Status</th>
+        <th class="b">Last Review Success</th>
+        <th class="b">Deploy Status</th>
+        <th class="b">Last Deploy Success</th>
+        <th class="b">Artifact or Build #</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr ng-repeat="job in cistatus.jobs | filter:selectedEnvironment" ng-if="job[cistatus.yearVersions[1]].reviewStatus == 'notbuilt' || job[cistatus.yearVersions[1]].deployStatus == 'notbuilt' ">
+        <th>
+          {{job.name}}
+        </th>
+        <td class="b">
+          <a href="{{job[cistatus.yearVersions[1]].reviewUrl}}">
+            <img class="statusimage" ng-src="assets/{{job[cistatus.yearVersions[1]].reviewStatus}}.gif"
+              title="{{job[cistatus.yearVersions[1]].reviewStatus | reWord}}"
+              data-toggle="tooltip"
+              data-placement="top"
+          </a>
+        </td>
+        <td class="b">
+          <a href="{{job[cistatus.yearVersions[1]].reviewLastUrl}}">
+            {{job[cistatus.yearVersions[1]].reviewLast | fromNow}}
+          </a>
+        </td>
+        <td class="b">
+          <a href="{{job[cistatus.yearVersions[1]].deployUrl}}">
+            <img class="statusimage" ng-src="assets/{{job[cistatus.yearVersions[1]].deployStatus}}.gif"
+              title="{{job[cistatus.yearVersions[1]].deployStatus | reWord}}"
+              data-toggle="tooltip"
+              data-placement="top"
+          </a>
+        </td>
+        <td class="b">
+          <a href="{{job[cistatus.yearVersions[1]].deployLastUrl}}">
+            {{job[cistatus.yearVersions[1]].deployLast | fromNow}}
+          </a>
+        </td>
+        <td class="b">
+          <a href="{{cistatus.useDetailsPage ? '#!/cistatus/' + job.name + '/' + cistatus.yearVersions[1] : job[cistatus.yearVersions[1]].deployLastUrl + '/changes'}}">
+            {{job[cistatus.yearVersions[1]].artifact || job[cistatus.yearVersions[1]].trigger}}
+          </a>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

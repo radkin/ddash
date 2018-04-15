@@ -1,6 +1,6 @@
 var config = require('../config');
 var Promise = require('bluebird');
-var _template = require('lodash/string/template');
+var _template = require('lodash/template');
 var get = Promise.promisify(require('request'));
 require('colorslite');
 
@@ -26,14 +26,17 @@ module.exports = function() {
       if (job.artifact) {
 
         promiseArray.push(
-          get('http://your/artifacts/repo/search?name=' +
+          get('http://adb.devops.fds.com/artifacts/search?name=' +
             escape(job.artifact) + '&release=' + ver)
           .spread(function(res, body) {
 
             var parsed = JSON.parse(body);
 
-            if (parsed.status && parsed.status === 'success') {
-              newVersion.artifact = parsed.result[0].version;
+            try {
+              if (parsed.status && parsed.status === 'success') {
+                newVersion.artifact = parsed.result[0].version;
+              }
+            } catch (e) {
             }
           })
           .catch(function(err) {
@@ -107,15 +110,15 @@ module.exports = function() {
 };
 
 function template(url, ver, type, name) {
-  if (name === 'larry' && type === 'deploy') {
+  if (name === 'PROS' && type === 'deploy') {
     return _template(url)({
       version: ver,
-      type: type + '_Stooge'
+      type: type + '_TRIGGER'
     });
-  } else if (name === 'curly') {
+  } else if (name === 'SDP') {
     if (type === 'deploy') {
       return _template(url)({
-        version: ver + '_stooge/',
+        version: ver + '_NEXUS-RELEASE-UPLOAD/',
         type: type
       });
     } else {

@@ -1,15 +1,10 @@
-var config = require('../config');
 
-module.exports.results = function(req, res, next, results) {
-  req.body = req.body || {};
-  req.body.results = results;
-  next();
-};
+var config = require('../config');
 
 module.exports.get = function(req, res) {
   if (config.useRedis) {
     var db = require('../db');
-    db.get('landing').then(function(data) {
+    db.get('buildfinder').then(function (data) {
       res.send(data);
     });
   } else {
